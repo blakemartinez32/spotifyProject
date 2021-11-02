@@ -4,7 +4,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import json
 
 #unique username from spotify
-username = "mfrogs32"
+
 
 #application details
 SPOTIPY_CLIENT_ID='d830be3f111a4fde99206fde7e672537'
@@ -14,7 +14,9 @@ SCOPE = "playlist-modify-private playlist-read-private"
 
 #authentication
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope=SCOPE))
-
+user = sp.current_user()
+username = user['uri']
+username = username[13:]
 #printing available genres to user
 genres = sp.recommendation_genre_seeds()
 print("~~~~~~~~~~~~~~~~~~~")
