@@ -2,25 +2,25 @@ import json
 import requests
 
 endpoint_url = "https://api.spotify.com/v1/recommendations?"
-token = "BQCuGEbjSpT3JhK6WW0fYXTu3BCWVugbyjK6czNYZhT4tnqO2AeA0jY615erJNQJInaqUmK3s0Kjf93tMvyWfe4FtVDAaFJ9EPeNuW8dh1aCuG-4JYjN6S9KL7yXa64rS04EtuDTKTdrnodwNXA4LLanerJuHZ0ywT4KV9yNUgEsUJljxpmacfI14kYJzrAZXbI5D191eA"
-user_id = "d830be3f111a4fde99206fde7e672537"
-
+token = "AQAdVUmIRy6r7MUOdMYlwxHbiLqtRlBJhvqJ84Rei3MQOc1c-VvpuSSo506CVt9BnqJOil3sr09_Z-iVa7DjyYKNZ2PBnAgB-pnSLW4IWm9iSepHWLNf9kGvDiXz6QizU6k"
+#user_id = "d830be3f111a4fde99206fde7e672537"
+playlist_name = input("Enter name for playlist:")
 user_genre = input("Enter genre for playlist:")
 user_energy = input("Enter energy wanted for playlist (0 - 1.0 inclusive) :")
 user_danceability = input("Enter danceability wanted for playlist (0 - 1.0 inclusive) :")
 user_valence = input("Enter valence (high value = happy,cheerful, euphoric    low value = sad,depressed,angry) wanted for playlist (0 - 1.0 inclusive) :")
 
 # OUR FILTERS
-limit=10
+limit=50
 market="US"
 seed_genres= user_genre
 target_danceability=float(user_danceability)
 uris = [] 
-#seed_artists = '0YhUSm86okLWldQVwJkLlP'
+#seed_artists = '3TVXtAsR1Inumwj472S9r4'
 #seed_tracks='55SfSsxneljXOk5S3NVZIW'
 target_energy = float(user_energy)
 target_valence = float(user_valence)
-target_duration_ms = 180000 #3 min per song
+#target_duration_ms = 180000 #3 min per song
 
 # PERFORM THE QUERY
 query = f'{endpoint_url}limit={limit}&market={market}&seed_genres={seed_genres}&target_danceability={target_danceability}'
@@ -28,7 +28,7 @@ query = f'{endpoint_url}limit={limit}&market={market}&seed_genres={seed_genres}&
 #query += f'&seed_tracks={seed_tracks}'
 query += f'&target_energy={target_energy}'
 query +=  f'&target_valence={target_valence}'
-query += f'&target_duration_ms={target_duration_ms}'
+#query += f'&target_duration_ms={target_duration_ms}'
 response = requests.get(query, 
                headers={"Content-Type":"application/json", 
                         "Authorization":f"Bearer {token}"})
@@ -48,11 +48,11 @@ for i,j in enumerate(json_response['tracks']):
 
 
 user_id = "mfrogs32"
-token = "BQCuGEbjSpT3JhK6WW0fYXTu3BCWVugbyjK6czNYZhT4tnqO2AeA0jY615erJNQJInaqUmK3s0Kjf93tMvyWfe4FtVDAaFJ9EPeNuW8dh1aCuG-4JYjN6S9KL7yXa64rS04EtuDTKTdrnodwNXA4LLanerJuHZ0ywT4KV9yNUgEsUJljxpmacfI14kYJzrAZXbI5D191eA"
+#token = "BQBzi8bqMjPRVKqg53IiGw1w5eW0nt888J6-7euZyYF3wN5PervqVTnAimhIyYT76gw2tSWhrK4bABPxub1TYu67pR7d6CNPHiAc0Bx8FU6-cAvRasRRViP2aeAnf4EvfcL7_LevpK5nvmeRG8TMiGgeDZDuhb__51YbIwl7RcbKmm76fdGvajnX6ZE59t20IG7vaqUxkQ"
 endpoint_url = f"https://api.spotify.com/v1/users/{user_id}/playlists"
 request_body = json.dumps({
-          "name": "test playlist",
-          "description": "peepee",
+          "name": f"{playlist_name}",
+          "description": "peepee poopoo",
           "public": False 
         })
 
